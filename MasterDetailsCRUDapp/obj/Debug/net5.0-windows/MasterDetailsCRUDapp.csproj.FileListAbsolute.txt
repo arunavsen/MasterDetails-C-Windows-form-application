@@ -16,3 +16,10 @@ D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\obj\Debug\net5.0-windows
 D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\obj\Debug\net5.0-windows\ref\MasterDetailsCRUDapp.dll
 D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\obj\Debug\net5.0-windows\MasterDetailsCRUDapp.pdb
 D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\obj\Debug\net5.0-windows\MasterDetailsCRUDapp.genruntimeconfig.cache
+D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\bin\Debug\net5.0-windows\System.Data.SqlClient.dll
+D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\bin\Debug\net5.0-windows\runtimes\win-arm64\native\sni.dll
+D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\bin\Debug\net5.0-windows\runtimes\win-x64\native\sni.dll
+D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\bin\Debug\net5.0-windows\runtimes\win-x86\native\sni.dll
+D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\bin\Debug\net5.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\bin\Debug\net5.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\obj\Debug\net5.0-windows\MasterDetailsCRUDapp.csproj.CopyComplete

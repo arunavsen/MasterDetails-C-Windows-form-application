@@ -29,8 +29,8 @@ namespace MasterDetailsCRUDapp
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -38,6 +38,10 @@ namespace MasterDetailsCRUDapp
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgvEmpCompany = new System.Windows.Forms.DataGridView();
+            this.dgvtxtEmpCompId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtxtCompanyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcmbPosition = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvtxtYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnImageClear = new System.Windows.Forms.Button();
             this.btnImageBrowse = new System.Windows.Forms.Button();
             this.pbxPhoto = new System.Windows.Forms.PictureBox();
@@ -56,10 +60,6 @@ namespace MasterDetailsCRUDapp
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvEmployee = new System.Windows.Forms.DataGridView();
-            this.dgvtxtEmpCompId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtxtCompanyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcmbPosition = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvtxtYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -161,24 +161,52 @@ namespace MasterDetailsCRUDapp
             this.dgvtxtCompanyName,
             this.dgvcmbPosition,
             this.dgvtxtYear});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEmpCompany.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEmpCompany.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEmpCompany.Location = new System.Drawing.Point(6, 428);
             this.dgvEmpCompany.Name = "dgvEmpCompany";
             this.dgvEmpCompany.RowTemplate.Height = 25;
             this.dgvEmpCompany.Size = new System.Drawing.Size(1097, 238);
             this.dgvEmpCompany.TabIndex = 16;
             // 
+            // dgvtxtEmpCompId
+            // 
+            this.dgvtxtEmpCompId.DataPropertyName = "EmpCmpID";
+            this.dgvtxtEmpCompId.HeaderText = "EmpCompId";
+            this.dgvtxtEmpCompId.Name = "dgvtxtEmpCompId";
+            this.dgvtxtEmpCompId.Visible = false;
+            // 
+            // dgvtxtCompanyName
+            // 
+            this.dgvtxtCompanyName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgvtxtCompanyName.DataPropertyName = "CompanyName";
+            this.dgvtxtCompanyName.HeaderText = "Company Name";
+            this.dgvtxtCompanyName.Name = "dgvtxtCompanyName";
+            // 
+            // dgvcmbPosition
+            // 
+            this.dgvcmbPosition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dgvcmbPosition.DataPropertyName = "PositionId";
+            this.dgvcmbPosition.HeaderText = "Position";
+            this.dgvcmbPosition.Name = "dgvcmbPosition";
+            this.dgvcmbPosition.Width = 71;
+            // 
+            // dgvtxtYear
+            // 
+            this.dgvtxtYear.DataPropertyName = "ExpYear";
+            this.dgvtxtYear.HeaderText = "Year";
+            this.dgvtxtYear.Name = "dgvtxtYear";
+            // 
             // btnImageClear
             // 
-            this.btnImageClear.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.btnImageClear.Location = new System.Drawing.Point(894, 321);
+            this.btnImageClear.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.btnImageClear.Location = new System.Drawing.Point(902, 328);
             this.btnImageClear.Name = "btnImageClear";
             this.btnImageClear.Size = new System.Drawing.Size(84, 31);
             this.btnImageClear.TabIndex = 15;
@@ -188,7 +216,7 @@ namespace MasterDetailsCRUDapp
             // btnImageBrowse
             // 
             this.btnImageBrowse.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btnImageBrowse.Location = new System.Drawing.Point(894, 268);
+            this.btnImageBrowse.Location = new System.Drawing.Point(902, 274);
             this.btnImageBrowse.Name = "btnImageBrowse";
             this.btnImageBrowse.Size = new System.Drawing.Size(84, 31);
             this.btnImageBrowse.TabIndex = 14;
@@ -200,7 +228,7 @@ namespace MasterDetailsCRUDapp
             this.pbxPhoto.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pbxPhoto.Location = new System.Drawing.Point(591, 57);
             this.pbxPhoto.Name = "pbxPhoto";
-            this.pbxPhoto.Size = new System.Drawing.Size(270, 302);
+            this.pbxPhoto.Size = new System.Drawing.Size(297, 302);
             this.pbxPhoto.TabIndex = 13;
             this.pbxPhoto.TabStop = false;
             // 
@@ -340,48 +368,20 @@ namespace MasterDetailsCRUDapp
             this.dgvEmployee.AllowUserToDeleteRows = false;
             this.dgvEmployee.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvEmployee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEmployee.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEmployee.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEmployee.Location = new System.Drawing.Point(28, 21);
             this.dgvEmployee.Name = "dgvEmployee";
             this.dgvEmployee.ReadOnly = true;
             this.dgvEmployee.RowTemplate.Height = 25;
             this.dgvEmployee.Size = new System.Drawing.Size(1054, 709);
             this.dgvEmployee.TabIndex = 0;
-            // 
-            // dgvtxtEmpCompId
-            // 
-            this.dgvtxtEmpCompId.DataPropertyName = "EmpCmpID";
-            this.dgvtxtEmpCompId.HeaderText = "EmpCompId";
-            this.dgvtxtEmpCompId.Name = "dgvtxtEmpCompId";
-            this.dgvtxtEmpCompId.Visible = false;
-            // 
-            // dgvtxtCompanyName
-            // 
-            this.dgvtxtCompanyName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dgvtxtCompanyName.DataPropertyName = "CompanyName";
-            this.dgvtxtCompanyName.HeaderText = "Company Name";
-            this.dgvtxtCompanyName.Name = "dgvtxtCompanyName";
-            // 
-            // dgvcmbPosition
-            // 
-            this.dgvcmbPosition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dgvcmbPosition.DataPropertyName = "PositionId";
-            this.dgvcmbPosition.HeaderText = "Position";
-            this.dgvcmbPosition.Name = "dgvcmbPosition";
-            this.dgvcmbPosition.Width = 71;
-            // 
-            // dgvtxtYear
-            // 
-            this.dgvtxtYear.DataPropertyName = "ExpYear";
-            this.dgvtxtYear.HeaderText = "Year";
-            this.dgvtxtYear.Name = "dgvtxtYear";
             // 
             // Form1
             // 
