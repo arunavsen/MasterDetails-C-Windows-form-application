@@ -29,8 +29,8 @@ namespace MasterDetailsCRUDapp
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -52,7 +52,7 @@ namespace MasterDetailsCRUDapp
             this.label3 = new System.Windows.Forms.Label();
             this.txtEmpName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textEmpCode = new System.Windows.Forms.TextBox();
+            this.txtEmpCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvEmployee = new System.Windows.Forms.DataGridView();
@@ -98,7 +98,7 @@ namespace MasterDetailsCRUDapp
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.txtEmpName);
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.textEmpCode);
+            this.tabPage1.Controls.Add(this.txtEmpCode);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
@@ -128,6 +128,7 @@ namespace MasterDetailsCRUDapp
             this.btnReset.TabIndex = 2;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnDelete
             // 
@@ -160,14 +161,14 @@ namespace MasterDetailsCRUDapp
             this.dgvtxtCompanyName,
             this.dgvcmbPosition,
             this.dgvtxtYear});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEmpCompany.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEmpCompany.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvEmpCompany.Location = new System.Drawing.Point(6, 428);
             this.dgvEmpCompany.Name = "dgvEmpCompany";
             this.dgvEmpCompany.RowTemplate.Height = 25;
@@ -306,12 +307,12 @@ namespace MasterDetailsCRUDapp
             this.label2.TabIndex = 2;
             this.label2.Text = "Emp. Name";
             // 
-            // textEmpCode
+            // txtEmpCode
             // 
-            this.textEmpCode.Location = new System.Drawing.Point(158, 57);
-            this.textEmpCode.Name = "textEmpCode";
-            this.textEmpCode.Size = new System.Drawing.Size(326, 26);
-            this.textEmpCode.TabIndex = 1;
+            this.txtEmpCode.Location = new System.Drawing.Point(158, 57);
+            this.txtEmpCode.Name = "txtEmpCode";
+            this.txtEmpCode.Size = new System.Drawing.Size(326, 26);
+            this.txtEmpCode.TabIndex = 1;
             // 
             // label1
             // 
@@ -339,14 +340,14 @@ namespace MasterDetailsCRUDapp
             this.dgvEmployee.AllowUserToDeleteRows = false;
             this.dgvEmployee.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvEmployee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEmployee.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEmployee.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvEmployee.Location = new System.Drawing.Point(28, 21);
             this.dgvEmployee.Name = "dgvEmployee";
             this.dgvEmployee.ReadOnly = true;
@@ -391,6 +392,7 @@ namespace MasterDetailsCRUDapp
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "C# Master Details CRUD APP";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -426,7 +428,7 @@ namespace MasterDetailsCRUDapp
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtEmpName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textEmpCode;
+        private System.Windows.Forms.TextBox txtEmpCode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dgvEmployee;
