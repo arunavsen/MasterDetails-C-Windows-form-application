@@ -15,7 +15,13 @@ namespace MasterDetailsCRUDapp
     {
         public int inEmpId;
         bool isDefaultImg = true;
-        string strConnectionString = @"Data Source=DESKTOP-8NTSO8C\SQLEXPRESS; Initial Catalog=MasterDetailsDB; integrated Security= true;";
+
+        //Office
+        //string strConnectionString = @"Data Source=DESKTOP-8NTSO8C\SQLEXPRESS; Initial Catalog=MasterDetailsDB; integrated Security= true;";
+
+        //Home
+        string strConnectionString = @"Data Source=DESKTOP-5FBSLNK; Initial Catalog=MasterDetailsDB; integrated Security= true;";
+
         string strPreviousImage = "";
         OpenFileDialog ofd = new OpenFileDialog();
 
@@ -68,8 +74,8 @@ namespace MasterDetailsCRUDapp
                 DataTable dtbl = new DataTable();
                 sqlDa.Fill(dtbl);
                 DataRow topItem = dtbl.NewRow();
-                topItem[0] = 0;
-                topItem[1] = "-Select-";
+                topItem[0] = 0; // PositionId column
+                topItem[1] = "-Select-"; // Position Column
                 dtbl.Rows.InsertAt(topItem, 0);
                 cmbPosition.ValueMember = dgvcmbPosition.ValueMember = "PositionId";
                 cmbPosition.DisplayMember = dgvcmbPosition.DisplayMember = "Position";
