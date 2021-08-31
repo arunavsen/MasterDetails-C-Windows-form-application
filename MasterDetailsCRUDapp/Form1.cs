@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,6 +102,101 @@ namespace MasterDetailsCRUDapp
             isDefaultImg = true;
             strPreviousImage = "";
 
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (ValidMasterDetailForm())
+            {
+                int _EmpID = 0;
+
+                using (SqlConnection sqlCon = new SqlConnection(strConnectionString))
+                {
+                    sqlCon.Open();
+                    //Master
+                    SqlCommand sqlCmd = new SqlCommand("EmployeeAddOrEdit",sqlCon);
+                    sqlCmd.CommandType = CommandType.StoredProcedure;
+                    sqlCmd.Parameters.AddWithValue("@EmpId", inEmpId);
+                    sqlCmd.Parameters.AddWithValue("@EmpCode", txtEmpCode.Text.Trim());
+                    sqlCmd.Parameters.AddWithValue("@EmpName",txtEmpName.Text.Trim());
+                    sqlCmd.Parameters.AddWithValue("@PositionID",Convert.ToInt32( cmbPosition.SelectedValue));
+                    sqlCmd.Parameters.AddWithValue("@DOB", dtpDOB.Value);
+                    sqlCmd.Parameters.AddWithValue("@Gender",cmbGender.Text);
+                    sqlCmd.Parameters.AddWithValue("@State",rbtRegular.Checked? "Regular":"Contractual");
+
+                    //If user doesn't insert any image during Add action
+                    if (isDefaultImg)
+                    {
+                        sqlCmd.Parameters.AddWithValue("@ImagePath",DBNull.Value);
+                    }
+                    // If user doesn't update any image during Update action
+                    else if (inEmpId > 0 && strPreviousImage != "")
+                    {
+                        sqlCmd.Parameters.AddWithValue("@ImagePath", strPreviousImage);
+                    }
+                    else
+                    {
+                        sqlCmd.Parameters.AddWithValue("@ImagePath", SaveImage(ofd.FileName));
+                    }
+
+                    _EmpID = Convert.ToInt32(sqlCmd.ExecuteScalar());
+                }
+
+                //Details
+                using (SqlConnection sqlCon = new SqlConnection(strConnectionString))
+                {
+                    sqlCon.Open();
+                    foreach (DataGridViewRow item in dgvEmpCompany.Rows)
+                    {
+                        if (item.IsNewRow)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            SqlCommand sqlCmd = new SqlCommand("EmpCompanyAddOrEdit", sqlCon);
+                            sqlCmd.CommandType = CommandType.StoredProcedure;
+                            sqlCmd.Parameters.AddWithValue("@EmpCmpId", Convert.ToInt32(item.Cells["dgvtxtEmpCompId"].Value == DBNull.Value? "0" : item.Cells["dgvtxtEmpCompId"].Value));
+                            sqlCmd.Parameters.AddWithValue("@EmpId", _EmpID);
+                            sqlCmd.Parameters.AddWithValue("@CompanyName", item.Cells["dgvtxtCompanyName"].Value == DBNull.Value ? "0" : item.Cells["dgvtxtCompanyName"].Value);
+                            sqlCmd.Parameters.AddWithValue("@PositionID", Convert.ToInt32(item.Cells["dgvcmbPosition"].Value == DBNull.Value ? "0" : item.Cells["dgvcmbPosition"].Value));
+                            sqlCmd.Parameters.AddWithValue("@ExpYear", Convert.ToInt32(item.Cells["dgvtxtYear"].Value == DBNull.Value ? "0" : item.Cells["dgvtxtYear"].Value));
+                            sqlCmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                Clear();
+                MessageBox.Show("Submitted Successfully");
+            }
+        }
+
+        //dgvtxtEmpCompId
+        //dgvtxtCompanyName
+        //dgvcmbPosition
+        //ExpYear
+
+        bool ValidMasterDetailForm()
+        {
+            bool _isValid = true;
+            if (txtEmpName.Text.Trim() == "")
+            {
+                MessageBox.Show("Employee name is required");
+                _isValid = false;
+            }
+
+            return _isValid;
+        }
+
+        string SaveImage(string _imagePath)
+        {
+            string _fileName = Path.GetFileNameWithoutExtension(_imagePath);
+            string _extension = Path.GetExtension(_imagePath);
+            //Shorten Image Name
+            _fileName = _fileName.Length <= 15 ? _fileName : _fileName.Substring(0, 15);
+            _fileName = _fileName + DateTime.Now.ToString("yymmssfff") + _extension;
+            pbxPhoto.Image.Save(Application.StartupPath + "\\Images\\" + _fileName);
+            return _fileName;
         }
     }
 }
