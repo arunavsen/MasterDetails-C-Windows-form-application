@@ -16,6 +16,9 @@ namespace MasterDetailsCRUDapp
         public int inEmpId;
         bool isDefaultImg = true;
         string strConnectionString = @"Data Source=DESKTOP-8NTSO8C\SQLEXPRESS; Initial Catalog=MasterDetailsDB; integrated Security= true;";
+        string strPreviousImage = "";
+        OpenFileDialog ofd = new OpenFileDialog();
+
         public Form1()
         {
             InitializeComponent();
@@ -73,6 +76,25 @@ namespace MasterDetailsCRUDapp
                 cmbPosition.DataSource = dtbl;
                 dgvcmbPosition.DataSource = dtbl.Copy();
             }
+        }
+
+        private void btnImageBrowse_Click(object sender, EventArgs e)
+        {
+            ofd.Filter = "Images(.jpg,.png)|*.png;*.jpg";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pbxPhoto.Image = new Bitmap(ofd.FileName);
+                isDefaultImg = false;
+                strPreviousImage = "";
+            }
+        }
+
+        private void btnImageClear_Click(object sender, EventArgs e)
+        {
+            pbxPhoto.Image = new Bitmap(Application.StartupPath + "\\Images\\defaultImg.png");
+            isDefaultImg = true;
+            strPreviousImage = "";
+
         }
     }
 }

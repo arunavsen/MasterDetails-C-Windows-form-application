@@ -5,7 +5,6 @@ D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\bin\Debug\net5.0-windows
 D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\bin\Debug\net5.0-windows\MasterDetailsCRUDapp.dll
 D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\bin\Debug\net5.0-windows\ref\MasterDetailsCRUDapp.dll
 D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\bin\Debug\net5.0-windows\MasterDetailsCRUDapp.pdb
-D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\obj\Debug\net5.0-windows\MasterDetailsCRUDapp.csproj.AssemblyReference.cache
 D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\obj\Debug\net5.0-windows\MasterDetailsCRUDapp.Form1.resources
 D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\obj\Debug\net5.0-windows\MasterDetailsCRUDapp.csproj.GenerateResource.cache
 D:\Arunav Sen\MasterDetailsCRUDapp\MasterDetailsCRUDapp\obj\Debug\net5.0-windows\MasterDetailsCRUDapp.GeneratedMSBuildEditorConfig.editorconfig

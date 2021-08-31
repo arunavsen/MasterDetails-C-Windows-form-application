@@ -212,6 +212,7 @@ namespace MasterDetailsCRUDapp
             this.btnImageClear.TabIndex = 15;
             this.btnImageClear.Text = "Clear";
             this.btnImageClear.UseVisualStyleBackColor = false;
+            this.btnImageClear.Click += new System.EventHandler(this.btnImageClear_Click);
             // 
             // btnImageBrowse
             // 
@@ -222,6 +223,7 @@ namespace MasterDetailsCRUDapp
             this.btnImageBrowse.TabIndex = 14;
             this.btnImageBrowse.Text = "Browse";
             this.btnImageBrowse.UseVisualStyleBackColor = false;
+            this.btnImageBrowse.Click += new System.EventHandler(this.btnImageBrowse_Click);
             // 
             // pbxPhoto
             // 
