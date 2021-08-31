@@ -56,6 +56,10 @@ namespace MasterDetailsCRUDapp
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvEmployee = new System.Windows.Forms.DataGridView();
+            this.dgvtxtEmpCompId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtxtCompanyName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcmbPosition = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvtxtYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -151,6 +155,11 @@ namespace MasterDetailsCRUDapp
             // 
             this.dgvEmpCompany.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvEmpCompany.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEmpCompany.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvtxtEmpCompId,
+            this.dgvtxtCompanyName,
+            this.dgvcmbPosition,
+            this.dgvtxtYear});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveCaption;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -326,6 +335,8 @@ namespace MasterDetailsCRUDapp
             // 
             // dgvEmployee
             // 
+            this.dgvEmployee.AllowUserToAddRows = false;
+            this.dgvEmployee.AllowUserToDeleteRows = false;
             this.dgvEmployee.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvEmployee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -338,9 +349,38 @@ namespace MasterDetailsCRUDapp
             this.dgvEmployee.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvEmployee.Location = new System.Drawing.Point(28, 21);
             this.dgvEmployee.Name = "dgvEmployee";
+            this.dgvEmployee.ReadOnly = true;
             this.dgvEmployee.RowTemplate.Height = 25;
             this.dgvEmployee.Size = new System.Drawing.Size(1054, 709);
             this.dgvEmployee.TabIndex = 0;
+            // 
+            // dgvtxtEmpCompId
+            // 
+            this.dgvtxtEmpCompId.DataPropertyName = "EmpCmpID";
+            this.dgvtxtEmpCompId.HeaderText = "EmpCompId";
+            this.dgvtxtEmpCompId.Name = "dgvtxtEmpCompId";
+            this.dgvtxtEmpCompId.Visible = false;
+            // 
+            // dgvtxtCompanyName
+            // 
+            this.dgvtxtCompanyName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgvtxtCompanyName.DataPropertyName = "CompanyName";
+            this.dgvtxtCompanyName.HeaderText = "Company Name";
+            this.dgvtxtCompanyName.Name = "dgvtxtCompanyName";
+            // 
+            // dgvcmbPosition
+            // 
+            this.dgvcmbPosition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dgvcmbPosition.DataPropertyName = "PositionId";
+            this.dgvcmbPosition.HeaderText = "Position";
+            this.dgvcmbPosition.Name = "dgvcmbPosition";
+            this.dgvcmbPosition.Width = 71;
+            // 
+            // dgvtxtYear
+            // 
+            this.dgvtxtYear.DataPropertyName = "ExpYear";
+            this.dgvtxtYear.HeaderText = "Year";
+            this.dgvtxtYear.Name = "dgvtxtYear";
             // 
             // Form1
             // 
@@ -390,6 +430,10 @@ namespace MasterDetailsCRUDapp
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dgvEmployee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtxtEmpCompId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtxtCompanyName;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgvcmbPosition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtxtYear;
     }
 }
 
