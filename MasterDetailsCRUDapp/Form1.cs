@@ -39,6 +39,7 @@ namespace MasterDetailsCRUDapp
         private void Form1_Load(object sender, EventArgs e)
         {
             PositionComboBoxFill();
+            FillEmployeeDataGridView();
             Clear();
         }
 
@@ -165,16 +166,11 @@ namespace MasterDetailsCRUDapp
                         }
                     }
                 }
-
+                FillEmployeeDataGridView();
                 Clear();
                 MessageBox.Show("Submitted Successfully");
             }
         }
-
-        //dgvtxtEmpCompId
-        //dgvtxtCompanyName
-        //dgvcmbPosition
-        //ExpYear
 
         bool ValidMasterDetailForm()
         {
@@ -197,6 +193,22 @@ namespace MasterDetailsCRUDapp
             _fileName = _fileName + DateTime.Now.ToString("yymmssfff") + _extension;
             pbxPhoto.Image.Save(Application.StartupPath + "\\Images\\" + _fileName);
             return _fileName;
+        }
+
+        void FillEmployeeDataGridView()
+        {
+            using (SqlConnection sqlcon = new SqlConnection(strConnectionString))
+            {
+                sqlcon.Open();
+                SqlDataAdapter sqlDa = new SqlDataAdapter("EmployeeViewAll",sqlcon);
+                sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataTable dtbl = new DataTable();
+                sqlDa.Fill(dtbl);
+                dgvEmployee.DataSource = dtbl;
+                dgvEmployee.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvEmployee.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvEmployee.Columns[0].Visible = false;
+            }
         }
     }
 }
