@@ -31,59 +31,11 @@ namespace MasterDetailsCRUDapp
             InitializeComponent();
         }
 
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            Clear();
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             PositionComboBoxFill();
             FillEmployeeDataGridView();
             Clear();
-        }
-
-        void Clear()
-        {
-            txtEmpCode.Text = txtEmpName.Text = "";
-            cmbGender.SelectedIndex = cmbPosition.SelectedIndex = 0;
-            dtpDOB.Value = DateTime.Now;
-            rbtRegular.Checked = true;
-
-            if (dgvEmpCompany.DataSource == null)
-            {
-                dgvEmpCompany.Rows.Clear();
-            }
-            else
-            {
-                dgvEmpCompany.DataSource = (dgvEmpCompany.DataSource as DataTable).Clone();
-            }
-
-            inEmpId = 0;
-            btnSave.Text = "Save";
-            btnDelete.Enabled = false;
-
-            pbxPhoto.Image = Image.FromFile(Application.StartupPath + "\\Images\\defaultImg.png");
-            isDefaultImg = true;
-        }
-
-        void PositionComboBoxFill()
-        {
-            using (SqlConnection sqlCon = new SqlConnection(strConnectionString))
-            {
-                sqlCon.Open();
-                SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Position", sqlCon);
-                DataTable dtbl = new DataTable();
-                sqlDa.Fill(dtbl);
-                DataRow topItem = dtbl.NewRow();
-                topItem[0] = 0; // PositionId column
-                topItem[1] = "-Select-"; // Position Column
-                dtbl.Rows.InsertAt(topItem, 0);
-                cmbPosition.ValueMember = dgvcmbPosition.ValueMember = "PositionId";
-                cmbPosition.DisplayMember = dgvcmbPosition.DisplayMember = "Position";
-                cmbPosition.DataSource = dtbl;
-                dgvcmbPosition.DataSource = dtbl.Copy();
-            }
         }
 
         private void btnImageBrowse_Click(object sender, EventArgs e)
@@ -115,20 +67,20 @@ namespace MasterDetailsCRUDapp
                 {
                     sqlCon.Open();
                     //Master
-                    SqlCommand sqlCmd = new SqlCommand("EmployeeAddOrEdit",sqlCon);
+                    SqlCommand sqlCmd = new SqlCommand("EmployeeAddOrEdit", sqlCon);
                     sqlCmd.CommandType = CommandType.StoredProcedure;
                     sqlCmd.Parameters.AddWithValue("@EmpId", inEmpId);
                     sqlCmd.Parameters.AddWithValue("@EmpCode", txtEmpCode.Text.Trim());
-                    sqlCmd.Parameters.AddWithValue("@EmpName",txtEmpName.Text.Trim());
-                    sqlCmd.Parameters.AddWithValue("@PositionID",Convert.ToInt32( cmbPosition.SelectedValue));
+                    sqlCmd.Parameters.AddWithValue("@EmpName", txtEmpName.Text.Trim());
+                    sqlCmd.Parameters.AddWithValue("@PositionID", Convert.ToInt32(cmbPosition.SelectedValue));
                     sqlCmd.Parameters.AddWithValue("@DOB", dtpDOB.Value);
-                    sqlCmd.Parameters.AddWithValue("@Gender",cmbGender.Text);
-                    sqlCmd.Parameters.AddWithValue("@State",rbtRegular.Checked? "Regular":"Contractual");
+                    sqlCmd.Parameters.AddWithValue("@Gender", cmbGender.Text);
+                    sqlCmd.Parameters.AddWithValue("@State", rbtRegular.Checked ? "Regular" : "Contractual");
 
                     //If user doesn't insert any image during Add action
                     if (isDefaultImg)
                     {
-                        sqlCmd.Parameters.AddWithValue("@ImagePath",DBNull.Value);
+                        sqlCmd.Parameters.AddWithValue("@ImagePath", DBNull.Value);
                     }
                     // If user doesn't update any image during Update action
                     else if (inEmpId > 0 && strPreviousImage != "")
@@ -157,7 +109,7 @@ namespace MasterDetailsCRUDapp
                         {
                             SqlCommand sqlCmd = new SqlCommand("EmpCompanyAddOrEdit", sqlCon);
                             sqlCmd.CommandType = CommandType.StoredProcedure;
-                            sqlCmd.Parameters.AddWithValue("@EmpCmpId", Convert.ToInt32(item.Cells["dgvtxtEmpCompId"].Value == DBNull.Value? "0" : item.Cells["dgvtxtEmpCompId"].Value));
+                            sqlCmd.Parameters.AddWithValue("@EmpCmpId", Convert.ToInt32(item.Cells["dgvtxtEmpCompId"].Value == DBNull.Value ? "0" : item.Cells["dgvtxtEmpCompId"].Value));
                             sqlCmd.Parameters.AddWithValue("@EmpId", _EmpID);
                             sqlCmd.Parameters.AddWithValue("@CompanyName", item.Cells["dgvtxtCompanyName"].Value == DBNull.Value ? "0" : item.Cells["dgvtxtCompanyName"].Value);
                             sqlCmd.Parameters.AddWithValue("@PositionID", Convert.ToInt32(item.Cells["dgvcmbPosition"].Value == DBNull.Value ? "0" : item.Cells["dgvcmbPosition"].Value));
@@ -172,43 +124,9 @@ namespace MasterDetailsCRUDapp
             }
         }
 
-        bool ValidMasterDetailForm()
+        private void btnReset_Click(object sender, EventArgs e)
         {
-            bool _isValid = true;
-            if (txtEmpName.Text.Trim() == "")
-            {
-                MessageBox.Show("Employee name is required");
-                _isValid = false;
-            }
-
-            return _isValid;
-        }
-
-        string SaveImage(string _imagePath)
-        {
-            string _fileName = Path.GetFileNameWithoutExtension(_imagePath);
-            string _extension = Path.GetExtension(_imagePath);
-            //Shorten Image Name
-            _fileName = _fileName.Length <= 15 ? _fileName : _fileName.Substring(0, 15);
-            _fileName = _fileName + DateTime.Now.ToString("yymmssfff") + _extension;
-            pbxPhoto.Image.Save(Application.StartupPath + "\\Images\\" + _fileName);
-            return _fileName;
-        }
-
-        void FillEmployeeDataGridView()
-        {
-            using (SqlConnection sqlcon = new SqlConnection(strConnectionString))
-            {
-                sqlcon.Open();
-                SqlDataAdapter sqlDa = new SqlDataAdapter("EmployeeViewAll",sqlcon);
-                sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-                DataTable dtbl = new DataTable();
-                sqlDa.Fill(dtbl);
-                dgvEmployee.DataSource = dtbl;
-                dgvEmployee.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dgvEmployee.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dgvEmployee.Columns[0].Visible = false;
-            }
+            Clear();
         }
 
         private void dgvEmployee_DoubleClick(object sender, EventArgs e)
@@ -221,7 +139,7 @@ namespace MasterDetailsCRUDapp
                 using (SqlConnection sqlcon = new SqlConnection(strConnectionString))
                 {
                     sqlcon.Open();
-                    SqlDataAdapter sqlDa = new SqlDataAdapter("EmployeeViewById",sqlcon);
+                    SqlDataAdapter sqlDa = new SqlDataAdapter("EmployeeViewById", sqlcon);
                     sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
                     sqlDa.SelectCommand.Parameters.AddWithValue("@EmpId", inEmpId);
                     DataSet ds = new DataSet();
@@ -231,7 +149,7 @@ namespace MasterDetailsCRUDapp
                     DataRow dr = ds.Tables[0].Rows[0];
                     txtEmpCode.Text = dr["EmpCode"].ToString();
                     txtEmpName.Text = dr["EmpName"].ToString();
-cmbPosition.SelectedValue = Convert.ToInt32(dr["PositionId"].ToString());
+                    cmbPosition.SelectedValue = Convert.ToInt32(dr["PositionId"].ToString());
                     dtpDOB.Value = Convert.ToDateTime(dr["DOB"].ToString());
                     cmbGender.Text = dr["Gender"].ToString();
                     if (dr["State"].ToString() == "Regular")
@@ -245,12 +163,12 @@ cmbPosition.SelectedValue = Convert.ToInt32(dr["PositionId"].ToString());
 
                     if (dr["ImagePath"] == DBNull.Value)
                     {
-                        pbxPhoto.Image =new Bitmap(Application.StartupPath + "\\Images\\defaultImg.png");
+                        pbxPhoto.Image = new Bitmap(Application.StartupPath + "\\Images\\defaultImg.png");
                         isDefaultImg = true;
                     }
                     else
                     {
-                        pbxPhoto.Image = new Bitmap(Application.StartupPath + "\\Images\\"+ dr["ImagePath"].ToString());
+                        pbxPhoto.Image = new Bitmap(Application.StartupPath + "\\Images\\" + dr["ImagePath"].ToString());
                         strPreviousImage = dr["ImagePath"].ToString();
                         isDefaultImg = false;
                     }
@@ -296,14 +214,98 @@ cmbPosition.SelectedValue = Convert.ToInt32(dr["PositionId"].ToString());
                     sqlCon.Open();
                     SqlCommand sqlCmd = new SqlCommand("EmployeeDelete", sqlCon);
                     sqlCmd.CommandType = CommandType.StoredProcedure;
-                    sqlCmd.Parameters.AddWithValue("@EmpId",inEmpId);
+                    sqlCmd.Parameters.AddWithValue("@EmpId", inEmpId);
                     sqlCmd.ExecuteNonQuery();
                     Clear();
                     FillEmployeeDataGridView();
                     MessageBox.Show("Deleted Successfully");
                 }
             }
-            
+
         }
+
+        void Clear()
+        {
+            txtEmpCode.Text = txtEmpName.Text = "";
+            cmbGender.SelectedIndex = cmbPosition.SelectedIndex = 0;
+            dtpDOB.Value = DateTime.Now;
+            rbtRegular.Checked = true;
+
+            if (dgvEmpCompany.DataSource == null)
+            {
+                dgvEmpCompany.Rows.Clear();
+            }
+            else
+            {
+                dgvEmpCompany.DataSource = (dgvEmpCompany.DataSource as DataTable).Clone();
+            }
+
+            inEmpId = 0;
+            btnSave.Text = "Save";
+            btnDelete.Enabled = false;
+
+            pbxPhoto.Image = Image.FromFile(Application.StartupPath + "\\Images\\defaultImg.png");
+            isDefaultImg = true;
+        }
+
+        void PositionComboBoxFill()
+        {
+            using (SqlConnection sqlCon = new SqlConnection(strConnectionString))
+            {
+                sqlCon.Open();
+                SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Position", sqlCon);
+                DataTable dtbl = new DataTable();
+                sqlDa.Fill(dtbl);
+                DataRow topItem = dtbl.NewRow();
+                topItem[0] = 0; // PositionId column
+                topItem[1] = "-Select-"; // Position Column
+                dtbl.Rows.InsertAt(topItem, 0);
+                cmbPosition.ValueMember = dgvcmbPosition.ValueMember = "PositionId";
+                cmbPosition.DisplayMember = dgvcmbPosition.DisplayMember = "Position";
+                cmbPosition.DataSource = dtbl;
+                dgvcmbPosition.DataSource = dtbl.Copy();
+            }
+        }
+
+        bool ValidMasterDetailForm()
+        {
+            bool _isValid = true;
+            if (txtEmpName.Text.Trim() == "")
+            {
+                MessageBox.Show("Employee name is required");
+                _isValid = false;
+            }
+
+            return _isValid;
+        }
+
+        string SaveImage(string _imagePath)
+        {
+            string _fileName = Path.GetFileNameWithoutExtension(_imagePath);
+            string _extension = Path.GetExtension(_imagePath);
+            //Shorten Image Name
+            _fileName = _fileName.Length <= 15 ? _fileName : _fileName.Substring(0, 15);
+            _fileName = _fileName + DateTime.Now.ToString("yymmssfff") + _extension;
+            pbxPhoto.Image.Save(Application.StartupPath + "\\Images\\" + _fileName);
+            return _fileName;
+        }
+
+        void FillEmployeeDataGridView()
+        {
+            using (SqlConnection sqlcon = new SqlConnection(strConnectionString))
+            {
+                sqlcon.Open();
+                SqlDataAdapter sqlDa = new SqlDataAdapter("EmployeeViewAll",sqlcon);
+                sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataTable dtbl = new DataTable();
+                sqlDa.Fill(dtbl);
+                dgvEmployee.DataSource = dtbl;
+                dgvEmployee.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvEmployee.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvEmployee.Columns[0].Visible = false;
+            }
+        }
+
+        
     }
 }
