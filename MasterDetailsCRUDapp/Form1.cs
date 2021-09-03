@@ -210,5 +210,58 @@ namespace MasterDetailsCRUDapp
                 dgvEmployee.Columns[0].Visible = false;
             }
         }
+
+        private void dgvEmployee_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgvEmployee.CurrentRow.Index != -1)
+            {
+                DataGridViewRow _dgvCurrentRow = dgvEmployee.CurrentRow;
+
+                inEmpId = Convert.ToInt32(_dgvCurrentRow.Cells[0].Value);
+                using (SqlConnection sqlcon = new SqlConnection(strConnectionString))
+                {
+                    sqlcon.Open();
+                    SqlDataAdapter sqlDa = new SqlDataAdapter("EmployeeViewById",sqlcon);
+                    sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    sqlDa.SelectCommand.Parameters.AddWithValue("@EmpId", inEmpId);
+                    DataSet ds = new DataSet();
+                    sqlDa.Fill(ds);
+
+                    //Master - Fill
+                    DataRow dr = ds.Tables[0].Rows[0];
+                    txtEmpCode.Text = dr["EmpCode"].ToString();
+                    txtEmpName.Text = dr["EmpName"].ToString();
+cmbPosition.SelectedValue = Convert.ToInt32(dr["PositionId"].ToString());
+                    dtpDOB.Value = Convert.ToDateTime(dr["DOB"].ToString());
+                    cmbGender.Text = dr["Gender"].ToString();
+                    if (dr["State"].ToString() == "Regular")
+                    {
+                        rbtRegular.Checked = true;
+                    }
+                    else
+                    {
+                        rbtContractual.Checked = true;
+                    }
+
+                    if (dr["ImagePath"] == DBNull.Value)
+                    {
+                        pbxPhoto.Image =new Bitmap(Application.StartupPath + "\\Images\\defaultImg.png");
+                        isDefaultImg = true;
+                    }
+                    else
+                    {
+                        pbxPhoto.Image = new Bitmap(Application.StartupPath + "\\Images\\"+ dr["ImagePath"].ToString());
+                        strPreviousImage = dr["ImagePath"].ToString();
+                        isDefaultImg = false;
+                    }
+
+                    dgvEmpCompany.AutoGenerateColumns = false;
+                    dgvEmpCompany.DataSource = ds.Tables[1];
+                    btnDelete.Enabled = true;
+                    btnSave.Text = "Update";
+                    tabControl1.SelectedIndex = 0;
+                }
+            }
+        }
     }
 }
