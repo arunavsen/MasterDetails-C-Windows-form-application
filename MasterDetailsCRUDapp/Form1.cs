@@ -263,5 +263,28 @@ cmbPosition.SelectedValue = Convert.ToInt32(dr["PositionId"].ToString());
                 }
             }
         }
+
+        private void dgvEmpCompany_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            DataGridViewRow dgvRow = dgvEmpCompany.CurrentRow;
+            if (dgvRow.Cells["dgvtxtEmpCompId"].Value != DBNull.Value)
+            {
+                if (MessageBox.Show("Are you sure to Delete this record?", "Master Detail CURD", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    using (SqlConnection sqlCon = new SqlConnection(strConnectionString))
+                    {
+                        sqlCon.Open();
+                        SqlCommand sqlCmd = new SqlCommand("EmpCompanyDelete", sqlCon);
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+                        sqlCmd.Parameters.AddWithValue("@EmpCmpId", Convert.ToInt32(dgvRow.Cells["dgvtxtEmpCompId"].Value));
+                        sqlCmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }
