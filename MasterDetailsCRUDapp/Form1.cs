@@ -286,5 +286,24 @@ cmbPosition.SelectedValue = Convert.ToInt32(dr["PositionId"].ToString());
                 e.Cancel = true;
             }
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure to Delete this record?", "Master Detail CURD", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                using (SqlConnection sqlCon = new SqlConnection(strConnectionString))
+                {
+                    sqlCon.Open();
+                    SqlCommand sqlCmd = new SqlCommand("EmployeeDelete", sqlCon);
+                    sqlCmd.CommandType = CommandType.StoredProcedure;
+                    sqlCmd.Parameters.AddWithValue("@EmpId",inEmpId);
+                    sqlCmd.ExecuteNonQuery();
+                    Clear();
+                    FillEmployeeDataGridView();
+                    MessageBox.Show("Deleted Successfully");
+                }
+            }
+            
+        }
     }
 }
